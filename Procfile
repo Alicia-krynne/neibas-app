@@ -1,0 +1,1 @@
+web: gunicorn Neibas.wsgi --log-file - 
