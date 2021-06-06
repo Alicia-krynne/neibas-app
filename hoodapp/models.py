@@ -1,15 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
+import cloudinary
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
 class Hood(models.Model):
     name = models.CharField(max_length =30,null=True)
     location = models.CharField(max_length =30,null=True)
-    image = models.ImageField(upload_to = 'images/',null=True)
+    image = CloudinaryField("media")
     occupants = models.IntegerField(null=True)
-    police_dept = models.IntegerField(default='eg 999,269')
-    health_dept = models.IntegerField(null=True)
     user = models.ForeignKey(User, null=True)
     objects = models.Manager()
     # Admin Foreign key
@@ -54,7 +54,7 @@ class Hood(models.Model):
 
 # User class
 class Profile(models.Model):
-    pro_photo = models.ImageField(upload_to = 'images/',null=True)
+    pro_photo = CloudinaryField("media")
     name = models.CharField(max_length =30,null=True)
     location = models.CharField(max_length =30,null=True)
     email = models.EmailField(max_length =50,null=True)

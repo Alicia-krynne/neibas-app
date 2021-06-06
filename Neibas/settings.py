@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from decouple import config,Csv
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,6 +76,12 @@ TEMPLATES = [
         },
     },
 ]
+
+cloudinary.config(
+    cloud_name='macrine',
+    api_key='689914659629972',
+    api_secret='wquzJbcEdqPH29g3ibW2fYmXRsU',
+)
 
 # Email configurations remember to install python-decouple
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
