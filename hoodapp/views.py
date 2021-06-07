@@ -10,7 +10,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
-from .models import Business, Hood,Neighbour,Profile, Post
+from .models import Business, Hood,Profile, Post
+from .emails import send_welcome_email
+from django.http import JsonResponse
 
 
 
@@ -20,38 +22,30 @@ def index(request):
     return render(request,'index.html',{"hood":hood})
 
 
-# def signup(request):
-#     if request.method == 'POST':
-#         form = SignupForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False)
-#             user.is_active = False
-#             user.save()
-#             profile=Profile(user=user)
-#             profile.save()
-#             current_site = get_current_site(request)
-#             mail_subject = 'Confirm your neighbourhood residence.'
-#             message = render_to_string('acc_active_email.html', {
-#                 'user': user,
-#                 'domain': current_site.domain,
-#                 'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-#                 'token':account_activation_token.make_token(user),
-#             })
-#             to_email = form.cleaned_data.get('email')
-#             email = EmailMessage(
-#                         mail_subject, message, to=[to_email]
-#             )
-#             email.send()
-#             return HttpResponse('<h3 style ="text-align:center;"> We have sent a link to your email, please follow the link to complete the registration. </h3>')
-#     else:
-#         form = SignupForm()
-#     return render(request, 'signup.html', {'form': form})
+def signup(request):
+    if request.method == 'POST':
+        name = request.POST.get('username')
+        email = request.POST.get('email')
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            profile=Profile(user=user)
+            profile.save()
+            send_welcome_email(name, email)
+            data = {'success': 'You have been successfully added to mailing list'}
+        return JsonResponse(data)
+            
+    else:
+        form = SignupForm()
+    return render(request, 'signup.html', {'form': form})
 
 
 def profile(request):
     profile = Profile.objects.filter(user=request.user)
     current_user = request.user
-    neighbour = Neighbour.objects.filter(user=current_user)
+    neighbour = Hood.objects.filter(user=current_user)
     biz = Business.objects.filter(user=current_user)
     image_form = ProfileForm()
     if request.method == 'POST':
@@ -66,7 +60,7 @@ def profile(request):
 
 
 def create(request):
-    area = Neighbour.objects.all()
+    area = Hood.objects.all()
     current_user = request.user
     if request.method == 'POST':
         form = NeighbourForm(request.POST, request.FILES)
@@ -83,7 +77,7 @@ def create(request):
 def hood(request,id):
     bizna = Business.objects.filter(neighbourhood_id=id)
     post_form = PostForm()
-    hood = Neighbour.objects.get(pk=id)
+    hood = Hood.objects.get(pk=id)
     posts = Post.objects.filter(neighbourhood_id=id)
     # posts = hood.post.all()
     return render(request, 'hood.html', {"bizna": bizna, "hood": hood, "post_form": post_form ,"posts": posts })
