@@ -1,4 +1,4 @@
-{% extends 'base.html'%} {% load bootstrap4 %} {% load staticfiles %} {{form.media}}
+{% extends 'base.html'%} {% load bootstrap4 %} {% load static %} {{form.media}}
 {{ block.super }}
 
 {% block content %} 
@@ -7,12 +7,12 @@
 			{% if user.profile.neighbourhood %}
 			  I belong to {{user.profile.neighbourhood}}
 			{% else %}
-			I don't belong to any hood
+			find hood
 			{% endif %}
 			</h3>
     <div class="card" style="opacity: 0.5;padding: 10px; color: rgb(19, 17, 17)">
             
-            <h2 class="text-center">WAKILISHA MTAA YAKO</h2>
+            <h2 class="text-center">WHATS  YOUR  AREA</h2>
             
         </div>
                 <div class="container">
@@ -114,10 +114,10 @@ a.animated-button:link, a.animated-button:visited {
 
 /* Victoria Buttons */
 a.animated-button.victoria-one {
-	border: 2px solid #D24D57;
+	border: 2px solid #4dacd2;
 }
 a.animated-button.victoria-one:after {
-	background: #D24D57;
+	background: #bc4dd2;
 	-moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
 	-ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
 	-webkit-transform: translateX(-50%) translateY(-50%) rotate(-25deg);

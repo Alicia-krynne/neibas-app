@@ -10,7 +10,7 @@ class Hood(models.Model):
     location = models.CharField(max_length =30,null=True)
     image = CloudinaryField("media")
     occupants = models.IntegerField(null=True)
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     objects = models.Manager()
     # Admin Foreign key
     def __str__(self):
@@ -58,7 +58,7 @@ class Profile(models.Model):
     name = models.CharField(max_length =30,null=True)
     location = models.CharField(max_length =30,null=True)
     email = models.EmailField(max_length =50,null=True)
-    neighbourhood = models.ForeignKey(Hood, null=True)
+    neighbourhood = models.ForeignKey(Hood, on_delete=models.CASCADE)
     bio = models.CharField(max_length =150,default='WELCOME TO  HOODAPP')
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile',null=True)
     
@@ -77,8 +77,8 @@ class Business(models.Model):
     name = models.CharField(max_length =30,null=True)
     description = models.CharField(max_length =130,null=True)
     email = models.EmailField(max_length =50,null=True)
-    user = models.ForeignKey(User, null=True)
-    neighbourhood = models.ForeignKey(Hood, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(Hood, on_delete=models.CASCADE)
  
     objects = models.Manager()
     def __str__(self):
@@ -120,8 +120,8 @@ class Business(models.Model):
 
 class Post(models.Model):
     post = models.CharField(max_length =130,null=True)
-    user = models.ForeignKey(User, null=True)
-    neighbourhood = models.ForeignKey(Hood,related_name='post',null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    neighbourhood = models.ForeignKey(Hood,on_delete=models.CASCADE,related_name='post',null=True)
 
     class Meta:
         ordering = ['id']
