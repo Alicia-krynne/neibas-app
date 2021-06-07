@@ -11,7 +11,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from .models import Business, Hood,Profile, Post
-from .emails import send_welcome_email
+from .email import send_welcome_email
 from django.http import JsonResponse
 
 
