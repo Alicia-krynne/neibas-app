@@ -1,15 +1,18 @@
 # [MY BLOCK ](https://joonshoodapp.herokuapp.com/)
 
-### A web application where users create profile linked to a community through which they can make posts, and interact with other Users and their businesses within a community.
+### A smple  community  web  application  for  users to  create  profiles , add a hood and  also  add businesses within the  Hoods.
 ------------------------------------------------------------------------
 ## BY: [MACRINE ALICE ](https://github.com/Alicia-krynne)
 
 ### SCREENSHOTS 
 
 ![homepage](./static/pics/hood.png)
-![profilepage](./static/pics/hoodprofile.png)
-![profilepage](./static/pics/hood2profile.png)
-![biz page](./static/pics/hodbiz)
+
+![profilepage](./static/pics/profilehood.png)
+
+![profilepage](./static/pics/profile2hood.png)
+
+![biz page](./static/pics/hodbiz.png)
 ### Requirements
 This project was created on a debian linux platform but should work on other unix based[not limited to] sytems.
 * Tested on Debian Linux
