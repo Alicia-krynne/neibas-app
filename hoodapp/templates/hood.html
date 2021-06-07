@@ -35,35 +35,35 @@
                     {% endfor %}
                 </div>
                 </div>
-                <div class="col-md-4">
-                        <div class="text-center">
-							<h1>Posts</h1>
-							<strong><p>N/B: post  in  your  hood </p></strong>
-                            {% for post in posts %}
-                           <div class="card-header">
-                                <p class="text-left">
-										<a href="/profiles/{{post.user.id}}/{{post.user.username}}">    <img src="{{post.user.profile.pro_photo.url}}" alt="Avatar" class="img-responsive" style="border-radius:70%;width: 50px; height:40px;">  {{post.user.username }} </a>
-                                </p>
-                                <div class="card-footer">
+    <div class="container">
+            <div class="text-center">
+  <h1>Posts</h1>
+  <strong><p>N/B: post  in  your  hood </p></strong>
+                {% for post in posts %}
+                <div class="card-header">
+                    <p class="text-left">
+        <a href="/profiles/{{post.user.id}}/{{post.user.username}}">    <img src="{{post.user.profile.pro_photo.url}}" alt="Avatar" class="img-responsive" style="border-radius:70%;width: 50px; height:40px;">  {{post.user.username }} </a>
+                    </p>
+                    <div class="card-footer">
 
-                                    {{post.post}}
-                                </div>
-                            </div>
-                       
-                            {% endfor %}
-                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                    Add post
-                                   </button>
-							<div class="collapse" id="collapseExample">
-								<form action="{%url 'post' %}" method="post">
-									{%csrf_token%} 
-									{% bootstrap_form post_form %}
-									<input type="submit" class="btn btn-success btn-lg" value="Post">
-								</form>
-								</div>
-							</div>
+                        {{post.post}}
                     </div>
+                </div>
+            
+                {% endfor %}
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Add post
+                        </button>
+  <div class="collapse" id="collapseExample">
+    <form action="{%url 'post' %}" method="post">
+      {%csrf_token%} 
+      {% bootstrap_form post_form %}
+      <input type="submit" class="btn btn-success btn-lg" value="Post">
+    </form>
+    </div>
+  </div>
         </div>
+</div>
 
 </div>
     <style>
